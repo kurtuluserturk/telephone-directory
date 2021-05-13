@@ -1,3 +1,11 @@
+## `json-server --watch db.json`
+
+This command is used to run the server. It runs on port:3000.
+
+## `npm start`
+
+After you run the server, you can use the 'npm start' to run the app. Terminal will say 'Something is already running on port 3000. Would you like to run the app on another port instead?' because of the json-server. You must press 'Y' to say Yes. Then it will run.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
