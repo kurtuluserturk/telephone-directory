@@ -41,7 +41,6 @@ const Login = () => {
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
-
                 {
                     admin
                         ? <Link to="/registration" className="items-center mt-50">
@@ -49,7 +48,6 @@ const Login = () => {
                         </Link>
                         : ""
                 }
-
             </Form>
         </div>
     )
