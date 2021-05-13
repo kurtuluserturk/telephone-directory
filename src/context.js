@@ -3,35 +3,41 @@ import React, { useContext, useState } from "react"
 const UserContext = React.createContext()
 
 const UserProvider = ({ children }) => {
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
+    const [fullName, setFullName] = useState("")
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
     const [admin, setAdmin] = useState()
     const [password, setPassword] = useState("")
+    const [people, setPeople] = useState([])
+    const [peopleShown, setPeopleShown] = useState(false)
+    const [search, setSearch] = useState("")
 
     const adminEmail = 'demo@sekizbit.com.tr'
     const adminPassword = '12346'
 
+    const handleSearch = e => setSearch(e.target.value)
+
     const handleLoginSubmit = e => {
         e.preventDefault()
 
-        if (adminEmail === email && adminPassword === password) {
-            const admin = { email, password }
-            setAdmin(admin)
-            localStorage.setItem('admin', JSON.stringify(admin))
-            alert('Logged in successfully')
+        if (adminEmail === email) {
+            if (adminPassword === password) {
+                const admin = { email, password }
+                setAdmin(admin)
+                localStorage.setItem('admin', JSON.stringify(admin))
+                alert('Logged in successfully')
+            }
+            else {
+                alert("Please check your password")
+            }
         }
         else {
-            alert("Please check your email and password")
+            alert("Please check your email")
         }
     }
 
-    const saveFirstName = (e) => {
-        setFirstName(e.target.value)
-    }
-    const saveLastName = (e) => {
-        setLastName(e.target.value)
+    const saveFullName = (e) => {
+        setFullName(e.target.value)
     }
     const saveEmail = (e) => {
         setEmail(e.target.value)
@@ -43,43 +49,64 @@ const UserProvider = ({ children }) => {
         setPassword(e.target.value)
     }
 
+    const addPerson = async () => {
+        await fetch('http://localhost:3000/people', {
+            method: 'POST',
+            body: JSON.stringify({
+                fullName: fullName,
+                email: email,
+                phone: phone
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            }
+        })
+            .then((response) => response.json())
+        setPeopleShown(false)
+        alert('The person saved')
+    }
+
     const handleRegistrationSubmit = e => {
         e.preventDefault()
 
-        if (phone.length === 10) {
+        if (phone.length === 11) {
             const firstPhoneDigit = phone.toString()[0]
             const secondPhoneDigit = phone.toString()[1]
             if (firstPhoneDigit == 0 && secondPhoneDigit == 5) {
-                const userInfo =
-                {
-                    firstName,
-                    lastName,
-                    email,
-                    phone
-                }
-                console.log(JSON.stringify(userInfo))
+                addPerson()
             }
             else {
                 alert('Phone must start with 05')
             }
         }
         else {
-            alert('Phone number must be 10 numbers')
+            alert('Phone number must be 11 numbers')
         }
+    }
+
+    const showPeople = async () => {
+        await fetch('http://localhost:3000/people')
+            .then((response) => response.json())
+            .then((people) => setPeople(people));
+        setPeopleShown(true)
     }
 
     return (
         <UserContext.Provider
             value={{
-                firstName,
-                lastName,
+                fullName,
                 email,
                 admin,
                 phone,
                 password,
+                peopleShown,
+                people,
+                search,
+                handleSearch,
+                addPerson,
+                showPeople,
                 handleLoginSubmit,
-                saveFirstName,
-                saveLastName,
+                saveFullName,
                 saveEmail,
                 savePhone,
                 savePassword,
