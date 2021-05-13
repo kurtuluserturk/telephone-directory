@@ -6,9 +6,9 @@ import { useGlobalContext } from '../context';
 const Login = () => {
     const {
         admin,
-        email,
+        authEmail,
         password,
-        saveEmail,
+        saveAuthEmail,
         savePassword,
         handleLoginSubmit
     } = useGlobalContext();
@@ -20,8 +20,8 @@ const Login = () => {
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
                         type="email"
-                        value={email}
-                        onChange={(e) => { saveEmail(e) }}
+                        value={authEmail}
+                        onChange={(e) => { saveAuthEmail(e) }}
                         placeholder="Enter email"
                         required
                     />
@@ -43,7 +43,7 @@ const Login = () => {
                 </Button>
                 {
                     admin
-                        ? <Link to="/registration" className="items-center mt-50">
+                        ? <Link to="/registration" className="items-center mt-50 font-weight-600">
                             Registration Page
                         </Link>
                         : ""
