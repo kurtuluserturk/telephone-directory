@@ -43,7 +43,7 @@ const Login = () => {
                 </Button>
                 {
                     admin
-                        ? <Link to="/registration" className="items-center mt-50 font-weight-600">
+                        ? <Link to="/registration" className="items-center mt-20 font-weight-600">
                             Registration Page
                         </Link>
                         : ""
