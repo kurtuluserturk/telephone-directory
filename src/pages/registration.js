@@ -12,7 +12,8 @@ const Registration = () => {
         saveFullName,
         saveEmail,
         savePhone,
-        handleRegistrationSubmit
+        handleRegistrationSubmit,
+        removeAdminFromLocalStorage
     } = useGlobalContext();
 
     return (
@@ -62,7 +63,18 @@ const Registration = () => {
 
                             </Form>
 
-                            <Link to="/people" className="items-center mt-50">
+                            <Button
+                                className="mt-20"
+                                variant="primary"
+                                type="submit"
+                                onClick={removeAdminFromLocalStorage}
+                            >
+                                <Link to="/" className="items-center color-white" >
+                                    Exit
+                                </Link>
+                            </Button>
+
+                            <Link to="/people" className="items-center mt-50 font-weight-600">
                                 People List
                             </Link>
                         </div>
