@@ -1,6 +1,6 @@
 ## `json-server --watch db.json`
 
-This command is used to run the server. It runs on port:3000.
+This command is used to run the server. It runs on port 3000.
 
 ## `npm start`
 
