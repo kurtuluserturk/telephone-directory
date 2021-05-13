@@ -78,6 +78,9 @@ const UserProvider = ({ children }) => {
             const secondPhoneDigit = phone.toString()[1]
             if (firstPhoneDigit == 0 && secondPhoneDigit == 5) {
                 addPerson()
+                setFullName('')
+                setPhone('')
+                setEmail('')
             }
             else {
                 alert('Phone must start with 05')
