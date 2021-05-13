@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Form } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 import { useGlobalContext } from '../context';
 
 const Login = () => {
@@ -40,6 +41,15 @@ const Login = () => {
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
+
+                {
+                    admin
+                        ? <Link to="/registration" className="items-center mt-50">
+                            Registration Page
+                        </Link>
+                        : ""
+                }
+
             </Form>
         </div>
     )
