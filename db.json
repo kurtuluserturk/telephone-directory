@@ -1,0 +1,40 @@
+{
+  "people": [
+    {
+      "id": 1,
+      "fullName": "Brad",
+      "phone": "05552227777",
+      "email": "example@gmail.com"
+    },
+    {
+      "id": 2,
+      "fullName": "Holly",
+      "phone": "05553337777",
+      "email": "sample@gmail.com"
+    },
+    {
+      "id": 3,
+      "fullName": "John",
+      "phone": "05552226666",
+      "email": "lorem@gmail.com"
+    },
+    {
+      "id": 4,
+      "fullName": "Jack",
+      "phone": "05554447777",
+      "email": "exlorem@gmail.com"
+    },
+    {
+      "id": 5,
+      "fullName": "Lorem",
+      "phone": "05559997777",
+      "email": "samplorem@gmail.com"
+    },
+    {
+      "fullName": "ali veli",
+      "email": "erturkkurtulus360@gmail.com",
+      "phone": "05350121063",
+      "id": 6
+    }
+  ]
+}
