@@ -20,6 +20,7 @@ const UserProvider = ({ children }) => {
             const admin = { email, password }
             setAdmin(admin)
             localStorage.setItem('admin', JSON.stringify(admin))
+            alert('Logged in successfully')
         }
         else {
             alert("Please check your email and password")
