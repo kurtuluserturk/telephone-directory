@@ -1,69 +1,58 @@
 import React from 'react'
-import { useState } from 'react'
-import { Table } from 'react-bootstrap'
+import { Button, Table } from 'react-bootstrap'
+import Search from '../components/Search';
+import { useGlobalContext } from '../context';
 
 const PeopleList = () => {
-    const [peopleShown, setPeopleShown] = useState(false)
-
-    const showPeople = () => {
-        const xhr = new XMLHttpRequest();
-
-        xhr.onload = function () {
-            console.log(xhr.response)
-        }
-
-        xhr.open("GET", "./data.json");
-
-        xhr.send();
-    }
+    const {
+        admin,
+        search,
+        people,
+        showPeople,
+        peopleShown
+    } = useGlobalContext();
 
     return (
-        <div className="text-center w-500">
-            <h2>People list</h2>
-            <button
-                onClick={showPeople}
-            >
-                Show People
-            </button>
+        <div>
             {
-                peopleShown
-                    ? <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>053545465</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>053545465</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@asdksa</td>
-                                <td>059845465</td>
-                            </tr>
-                        </tbody>
-                    </Table>
-                    : ""
+                admin
+                    ? <div className="items-center">
+                        <div className="text-center w-500 mt-50">
+                            <h2>People list</h2>
+                            <Search />
+                            <Button onClick={showPeople}>
+                                Show People
+                            </Button>
+                            {
+                                peopleShown
+                                    ? <Table striped bordered hover>
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Full Name</th>
+                                                <th>Email</th>
+                                                <th>Phone</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                people.filter(person => person.fullName.toLowerCase().includes(search.toLowerCase())).map((person) => {
+                                                    return <tr key={person.id}>
+                                                        <td>{person.id}</td>
+                                                        <td>{person.fullName}</td>
+                                                        <td>{person.email}</td>
+                                                        <td>{person.phone}</td>
+                                                    </tr>
+                                                })
+                                            }
+                                        </tbody>
+                                    </Table>
+                                    : ""
+                            }
+                        </div>
+                    </div>
+                    : <h4 className="items-center">You have to login to see this page</h4>
             }
-
         </div>
     )
 }
