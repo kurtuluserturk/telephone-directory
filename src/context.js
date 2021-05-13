@@ -7,6 +7,7 @@ const UserProvider = ({ children }) => {
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
     const [admin, setAdmin] = useState()
+    const [authEmail, setAuthEmail] = useState("")
     const [password, setPassword] = useState("")
     const [people, setPeople] = useState([])
     const [peopleShown, setPeopleShown] = useState(false)
@@ -20,9 +21,9 @@ const UserProvider = ({ children }) => {
     const handleLoginSubmit = e => {
         e.preventDefault()
 
-        if (adminEmail === email) {
+        if (adminEmail === authEmail) {
             if (adminPassword === password) {
-                const admin = { email, password }
+                const admin = { authEmail, password }
                 setAdmin(admin)
                 localStorage.setItem('admin', JSON.stringify(admin))
                 alert('Logged in successfully')
@@ -44,6 +45,9 @@ const UserProvider = ({ children }) => {
     }
     const savePhone = (e) => {
         setPhone(e.target.value)
+    }
+    const saveAuthEmail = (e) => {
+        setAuthEmail(e.target.value)
     }
     const savePassword = (e) => {
         setPassword(e.target.value)
@@ -91,6 +95,13 @@ const UserProvider = ({ children }) => {
         setPeopleShown(true)
     }
 
+    const removeAdminFromLocalStorage = () => {
+        localStorage.removeItem('admin')
+        setAdmin('')
+        setEmail('')
+        setPassword('')
+    }
+
     return (
         <UserContext.Provider
             value={{
@@ -109,8 +120,10 @@ const UserProvider = ({ children }) => {
                 saveFullName,
                 saveEmail,
                 savePhone,
+                saveAuthEmail,
                 savePassword,
-                handleRegistrationSubmit
+                handleRegistrationSubmit,
+                removeAdminFromLocalStorage
             }}
         >
             {children}
